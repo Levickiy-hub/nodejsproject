@@ -1,0 +1,18 @@
+﻿doctype html
+html
+  head
+    title login
+    link(rel='stylesheet',type="text/css", href='/stylesheets/login.css')
+  body
+    div(class ='limit') 
+        div(class='container-login100')
+            form(class = 'login100-form',action='/users', method='POST')
+                span(class='login100-form-title') LOGIN
+                div(class='wrap-input valid-input', data-validate='Enter username')
+                    input( name = 'username', class = 'input1', type = 'text', placeholder='Username')
+                    span(class='focus-input')
+                div(class='wrap-input valid-input', data-validate='Enter password')
+                    input(name = 'password', class = 'input1', type = 'password', placeholder='Password')
+                    span(class='focus-input')
+                div(class='container-login100-form-btn')
+                    input(class='login100-form-btn', type='submit', value="login") 

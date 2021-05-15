@@ -1,0 +1,15 @@
+﻿doctype html
+html
+  head
+    title title   
+    script(src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU", type="text/javascript")
+    link(rel='stylesheet',type="text/css", href='/stylesheets/header.css')
+    script(type="text/javascript")
+     include map.js
+  body 
+   include header.pug
+   div 
+     each val in shops
+      a(href="./?loc="+ val.location )= val.name
+   div( id="map", style="width: 600px; height: 400px")
+   
