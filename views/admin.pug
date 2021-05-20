@@ -1,0 +1,26 @@
+﻿doctype html
+html
+  head
+    link(rel='stylesheet',type="text/css", href='/stylesheets/header.css')
+    link(rel='stylesheet',type="text/css", href='/stylesheets/admin.css')
+    script(type="text/javascript",src='/javascripts/wsClient.js')
+    title Admin
+  body
+   include header.pug
+   div(class='allcon')
+    div(class='divblock')
+       h4 product
+         form(action='/admin', method='POST')
+            each val in info
+              p= val.shopname+" "+ val.address+" "+val.productname+" "+val.price+" "+val.login
+                input(type="checkbox", name="id", value=val.id)
+            button(click='startWS()',name = 'proof', value ='proof') proof  
+            button(name='proof', value ='del') del  
+    div(class='divblock')
+        h4 delete user
+            form(action='/admin/userdel', method='POST')
+                each val in users
+                    if val.role != true
+                      p="id: "+ val.id+" username: "+val.name+" login: "+ val.login+" "
+                         input(type="checkbox", name="id", value=val.id)
+                button() proof

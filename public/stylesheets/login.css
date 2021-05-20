@@ -1,13 +1,35 @@
 ﻿body {
 }
+a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+    font-family: Poppins-Medium;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    padding: 0 20px;
+    width:auto;
+}
+.ref {
+    display: flex;
+    width: 175px;
+    text-align: center;
+    justify-content: center;
+    padding: 0 20px;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-*, ::after, ::before {
-    box-sizing: inherit;
-} 
+/**, ::after, ::before {
+   box-sizing: inherit;
+}*/
 .limit {
     width: 100%;
     margin: 0 auto;

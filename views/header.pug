@@ -1,12 +1,21 @@
-﻿header
-    div(class='column-1')
-        h1 h1h1h1h1h1h1h1
-    div(class='column-2')
+﻿header(class='header')
+    div()
+        h1 
+            a(href='./',class='logo') ProductsShops
+    div(class='header-center')
          form(action='/serch', method='POST')
              input(name = 'text',type = 'text')
              input(type='submit')
-    div(class='column-3')
-        form(action='/reg', method='GET')
-            button(class='column-3-1') reg
-        form(action='/log', method='GET')
-            button(class='column-3-2') log
+    div(class='header-right')
+        if user === undefined
+                a(href="/reg") reg
+                a(class='active',href="/log") log
+        else
+            if  user.role === true
+                a(href="/product") add product
+                a(href="/shop") add shop
+                a(href="/admin" class='active') #{user.name}
+                a(href="/logout") logout
+            else
+               a(href="/product", class='active') add product
+               a(href="/logout") logout

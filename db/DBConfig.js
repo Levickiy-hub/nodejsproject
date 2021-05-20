@@ -7,6 +7,7 @@ const sequelize = new Sequelize('NodejsProject', 'postgres', 'Admin12345', {
 });
 
 
+
 const User = sequelize.define("users", {
     id: {
         type: Sequelize.INTEGER,
@@ -31,7 +32,7 @@ const User = sequelize.define("users", {
         allowNull: false
     }
 });
-sequelize.sync().then(/*result => console.log(result)*/)
+sequelize.sync().then()
     .catch(err => console.log(err));
 
 const Shop = sequelize.define("shop", {
@@ -45,8 +46,12 @@ const Shop = sequelize.define("shop", {
         type: Sequelize.STRING,
         allowNull: false
     },
-    location: {
-        type: Sequelize.STRING,
+    locationX: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+    },
+    locationY: {
+        type: Sequelize.FLOAT,
         allowNull: true
     },
     address:{
@@ -75,9 +80,17 @@ const ProductShop = sequelize.define("product_shop", {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    iduser: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     price: {
         type: Sequelize.FLOAT,
         allowNull: false
+    },
+    instokc: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true
     }
 
 });
@@ -101,8 +114,30 @@ const Product = sequelize.define("product", {
 });
 sequelize.sync().then(/*result => console.log(result)*/)
     .catch(err => console.log(err));
+const Rating = sequelize.define("rating", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },
+    iduser: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+   idshop: {
+       type: Sequelize.INTEGER,
+       allowNull: false
+    },
+    rating: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+});
+sequelize.sync().then(result => console.log(result))
+    .catch(err => console.log(err));
 
 
 module.exports = {
-    sequelize, User, Shop, Product, ProductShop
+    sequelize, User, Shop, Product, ProductShop, Rating
 };

@@ -1,0 +1,47 @@
+﻿doctype html
+html
+  head
+    script(src="https://api-maps.yandex.ru/2.1/?apikey=9b3db5f9-444d-4adb-83c5-a57462d157d7&lang=ru_RU", type="text/javascript")
+    link(rel='stylesheet',type="text/css", href='/stylesheets/header.css')
+    link(rel='stylesheet',type="text/css", href='/stylesheets/main.css')
+    script(type="text/javascript")
+         |var l1=[];
+         |var l2=[];
+         |var lname=[];
+         |var ladr=[];
+         | l1.push(#{shop.locationX});
+         | l2.push(#{shop.locationY});
+         | lname.push('#{shop.name}');
+         | ladr.push('#{shop.address}');
+         include map.js
+    title #{shop.name}
+  body
+    include header.pug
+    div()
+     h1 #{shop.name}
+     h4 #{shop.address} 
+     div(class='raitblock')
+        form(action='/shop/rait',method='POST')
+            p rating #{rating}
+            input(type='radio',name='rait', value='1')
+            label 1
+            input(type='radio',name='rait', value='2')
+            label 2
+            input(type='radio',name='rait', value='3')
+            label 3
+            input(type='radio',name='rait', value='4')
+            label 4
+            input(type='radio',name='rait', value='5')
+            label 5
+            input(type ='submit',name='vote',value='vote')
+            input(type='chekbox',name='x',value=''+shop.locationX, checked='checked', style='display: none')
+            input(type='chekbox',name='y',value=''+shop.locationY, checked='checked', style='display: none')
+    div()
+        div( id="map", style="width: 600px; height: 400px")
+        div()
+            h2 product
+            ul
+            - var k=0;
+            each val in product
+                li= val.name+" "+ val.description+" " +price[k]
+                - k++;

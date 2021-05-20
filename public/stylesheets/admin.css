@@ -1,0 +1,14 @@
+﻿body {
+    background-color: #EFFBF8;
+}
+.allcon{
+    display:flex;
+}
+.divblock {
+    margin-top: 20px;
+    width: 50%;
+    height: 70%;
+    border: 1px solid #ccc;
+    /*border-color: black;*/
+    background-color: #f1f1f1;
+}

@@ -1,0 +1,32 @@
+﻿doctype html
+html
+  head
+    link(rel='stylesheet',type="text/css", href='/stylesheets/header.css')
+    link(rel='stylesheet',type="text/css", href='/stylesheets/main.css')
+    title Product
+  body
+    include header.pug
+    div() 
+       div(class="flex")
+            form(action='/product', method='POST')
+                span() PRODUCT
+                h4(style="color:red") #{error}
+                div(data-validate='Enter username')
+                    h1 #{errorname}
+                    input( name = 'name',type = 'text', placeholder='name')
+                    span()
+                div()
+                    h1 #{erroraddress}
+                    input(name = 'description', type = 'text', placeholder='description')
+                    span()
+                div()
+                    h1 #{erroraddress}
+                    input(name = 'price', type = 'text', placeholder='price')
+                    span()
+                div()
+                    h1
+                    select(name="nameshop")
+                       each val in shops
+                          option() #{val.name}
+                div()
+                    input( type='submit',value='registration product') 

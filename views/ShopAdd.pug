@@ -1,0 +1,35 @@
+﻿doctype html
+html
+  head
+    link(rel='stylesheet',type="text/css", href='/stylesheets/header.css')
+    link(rel='stylesheet',type="text/css", href='/stylesheets/main.css')
+    title ShopAdd
+  body
+   include header.pug
+   div() 
+       div(class="flex")
+            form(action='/shop', method='POST')
+                span() SHOP
+                h4(style="color:red") #{error}
+                div(data-validate='Enter username')
+                    h1 #{errorname}
+                    input( name = 'name',type = 'text', placeholder='name' )
+                    span()
+                div(data-validate='Enter login')
+                    h1 #{erroraddress}
+                    input(name = 'address', type = 'text', placeholder='address')
+                    span()
+                div( data-validate='Enter password')
+                    h1
+                    input(name = 'info',type = 'text', placeholder='info')
+                    span()
+                div( data-validate='Enter password')
+                    h1
+                    input(name = 'locationX',type = 'text', placeholder='locationX')
+                    span()
+                div( data-validate='Enter password')
+                    h1
+                    input(name = 'locationY',type = 'text', placeholder='locationY')
+                    span()
+                div()
+                    input( type='submit',value='registration shop') 

@@ -1,48 +1,37 @@
 ﻿    const localStrategy = require('passport-local').Strategy,
     db = require('../db/DB');
-//passport.serializeUser((user, done) => {
-//    done(null, user);
-//})
+var bcrypt = require('bcrypt')
+var salt = bcrypt.genSaltSync(10);
 
-//passport.deserializeUser((user, done) => {
-//    done(null, user);
-//})
-//passport.use(new localStrategy(
-//    async function (username, password, done) {
-//        const user = await db.UserFindByLogin(username);
-//        if (!user) {
-//            if (user.login === username && user.password === password) {
-//                return done(null, user);
-//            }
-//        }
-//    return done(null, false, { message: "WRONG" });
-//}));
-
-//module.exports = {
-//    passport: passport,
-//    db:db
-//};
 const initializePassport = (passport) => {
-    const authenticateUser = async (req, username, password, done) => {
+    const authenticateUser = async (username, password, done) => {
         try {
             const user = await db.UserFindByLogin(username);
             if (user !== null) {
-                if (user.password === password) {
+                if (bcrypt.compareSync(password, user.password)) {
+                    //console.log(password);
+                    console.log(user);
                     return done(null, user);
                 } else {
+                    //console.log(bcrypt.hashSync(password, salt))
                     return done(null, false, { message: 'password error' });
                 }
             }
             else {
+                console.log(bcrypt.hashSync(password, salt))
                 return done(null, false, { message: 'User not exists' });
             }
         } catch (e) {
             console.log(e);
         }
     }
-    passport.use(new localStrategy(authenticateUser));
-    passport.serializeUser = (user, done) => done(null, user);
-    passport.deserizalizeUser = (user, done) => done(null, user);
-}
+    passport.serializeUser(function (user, done) {
+        done(null, user);
+    });
 
+    passport.deserializeUser(function (user, done) {
+        done(null, user);
+    });
+    passport.use(new localStrategy(authenticateUser));
+}
 module.exports = initializePassport;

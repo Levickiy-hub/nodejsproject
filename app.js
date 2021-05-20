@@ -6,20 +6,29 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-//var passport = require('./passport/passport');
 const passport = require('passport');
 const initializePassport = require('./passport/passport');
-var  localStrategy = require('passport-local').Strategy;
+const WebSocket = require("ws");
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var shops = require('./routes/Shop');
 var prod = require('./routes/product');
+var admin = require('./routes/admin');
+
 
 var app = express();
 
 //// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+//const ws = new WebSocket('ws://www.host.com/path');
+//ws.on('open', function open() {
+//    ws.send('something');
+//});
+
+//ws.on('message', function incoming(data) {
+//    console.log(data);
+//});
 
 //// uncomment after placing your favicon in /public
 ////app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -30,13 +39,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: "asdasd", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
-app.use(passport.session());
 initializePassport(passport);
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/shop', shops);
 app.use('/product', prod);
+app.use('/admin', admin);
 
 //// catch 404 and forward to error handler
 //app.use(function (req, res, next) {
@@ -70,10 +79,4 @@ app.use('/product', prod);
 //});
 
 app.set('port', process.env.PORT || 3000);
-//app.post("/users/", passport.authenticate('local', { session: true }, {
-//            failureRedirect: '/login', successRedirect: '/home',
-//            failureFlash: true
-//        })
-//);
-
 var server = app.listen(app.get('port'));

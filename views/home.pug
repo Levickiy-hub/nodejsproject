@@ -1,15 +1,31 @@
 ﻿doctype html
 html
   head
-    title title   
-    script(src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU", type="text/javascript")
+    title Home  
+    script(src="https://api-maps.yandex.ru/2.1/?apikey=9b3db5f9-444d-4adb-83c5-a57462d157d7&lang=ru_RU", type="text/javascript")
     link(rel='stylesheet',type="text/css", href='/stylesheets/header.css')
+    link(rel='stylesheet',type="text/css", href='/stylesheets/main.css')
     script(type="text/javascript")
-     include map.js
+         |var l1=[];
+         |var l2=[];
+         |var lname=[];
+         |var ladr=[];
+         if shops != undefined
+            each val in shops
+                | l1.push(#{val.locationX});
+                | l2.push(#{val.locationY});
+                | lname.push('#{val.name}');
+                | ladr.push('#{val.address}');
+         include map.js
   body 
    include header.pug
    div 
-     each val in shops
-      a(href="./?loc="+ val.location )= val.name
-   div( id="map", style="width: 600px; height: 400px")
-   
+     div(class="container")
+        each val in shops
+            a(href="./shop/info?x="+val.locationX+"&y="+val.locationY)
+              div(class="divblock") 
+                 h4=val.name +" "+ val.address
+               
+                 h4=val.info
+   div(class="mapflex")
+   div( id="map")
