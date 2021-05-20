@@ -31,7 +31,7 @@ router.post('/reg', async function (req, res) {
     if (username.length > 3 || login.length > 3 || pass.length>3) {
         if (!await db.UserFindByLogin(login)) {
             if (pass == pass1) {
-                db.UserCreate(username, login, bcrypt.hashSync(pass, 10), 1);
+                db.UserCreate(username, login, bcrypt.hashSync(pass, 10), 0);
                 res.redirect('/');
             }
             res.render('RegistrationPage', { error: "пароли не совпадают" });
