@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db/DB')
+var bcrypt = require('bcrypt');
 
 router.get('/', async function (req, res) {
     var user;
