@@ -1,10 +1,20 @@
 ﻿const Sequelize = require('sequelize');
-const sequelize = new Sequelize('d1gufo17fe9uis', 'csyluhdtxqhnzr', '90db4952ac801f2d7be8ef737f10b24981a0350a7c2ece8c319b4c9c1175ebc2', {
+const sequelize = new Sequelize({
+    database: 'd1gufo17fe9uis',
+    username: 'csyluhdtxqhnzr',
+    password: '90db4952ac801f2d7be8ef737f10b24981a0350a7c2ece8c319b4c9c1175ebc2',
     dialect: 'postgres',
     host: 'ec2-54-216-48-43.eu-west-1.compute.amazonaws.com',
     port: '5432',
-    logging: false
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
+    //logging: false
 });
+sequelize.authenticate();
 
 
 
