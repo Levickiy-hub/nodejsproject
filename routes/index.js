@@ -33,10 +33,13 @@ router.post('/reg', async function (req, res) {
             if (pass == pass1) {
                 db.UserCreate(username, login, bcrypt.hashSync(pass, 10), 0);
                 res.redirect('/');
+                return;
             }
             res.render('RegistrationPage', { error: "пароли не совпадают" });
+            return;
         }
-        res.render('RegistrationPage', {error:"Логин занят"});
+        res.render('RegistrationPage', { error: "Логин занят" });
+        return;
     }
     res.render('RegistrationPage', { error:"Минимальная длинна для поля ввода = 4" }); 
    
